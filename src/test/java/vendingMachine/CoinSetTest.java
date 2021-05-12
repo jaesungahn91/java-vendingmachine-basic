@@ -1,5 +1,6 @@
 package vendingMachine;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,13 +10,23 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CoinSetTest {
     @Test
     void 동전을_생성한다() {
         CoinSet coin = CoinSet._100_COIN;
         assertThat(coin.value).isEqualTo(100);
+    }
+
+    @Test
+    void 동전() {
+        CoinSet coin = CoinSet.valueOf(10);
+        assertThat(coin).isEqualTo(CoinSet._10_COIN);
+    }
+
+    @Test
+    void 전체_동전은_금액이_큰_순서대로_반환된다() {
+        assertThat(CoinSet.highestOrder()).containsExactly(CoinSet._500_COIN, CoinSet._100_COIN, CoinSet._50_COIN, CoinSet._10_COIN);
     }
 
     @ParameterizedTest
